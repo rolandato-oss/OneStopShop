@@ -554,9 +554,15 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>Size of Establishment</label>
+                    <label>Number of Holding Facilities</label>
                     <input type="text" placeholder="e.g., 15 ponds, 50 tanks">
                     <div class="example">Example: 15 ponds, 50 tanks</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Size of Holding Facilities (Cubic meters)</label>
+                    <input type="text" placeholder="e.g., Ponds (1000 metre square each; cages (75 cubic metres each)">
+                    <div class="example">Example: Ponds (1000 metre square each; cages (75 cubic metre each)</div>
                 </div>
                 
                 <div class="form-group">
@@ -630,6 +636,14 @@
                         <div class="checkbox-item">
                             <input type="checkbox" id="borehole-water">
                             <label for="borehole-water">Borehole</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="brackish-water">
+                            <label for="brackish-water">Brackish water</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sea-water">
+                            <label for="sea-water">Sea water (Marine)</label>
                         </div>
                         <div class="checkbox-item">
                             <input type="checkbox" id="rainwater-harvesting">
@@ -735,6 +749,8 @@
                         <option value="lake">Lake</option>
                         <option value="reservoir">Reservoir</option>
                         <option value="groundwater">Groundwater (Borehole/Wells)</option>
+                        <option value="lagoon">Lagoon</option>
+                        <option value="sea">Sea</option>
                         <option value="other">Other</option>
                     </select>
                 </div>
