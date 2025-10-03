@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Consolidated Aquaculture Permit Application</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        :root {
+            --fc-blue: #1a5fb4;
+            --wrc-green: #2e7d32;
+            --epa-teal: #00796b;
+            --light-bg: #f8f9fa;
+            --card-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e0f7fa 0%, #f5f5f5 100%);
+            padding: 20px;
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .logos {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .logo-container {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .logo {
+            width: 120px;
+            height: auto;
+            border-radius: 8px;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .logo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .fc-logo { border-color: var(--fc-blue); }
+        .wrc-logo { border-color: var(--wrc-green); }
+        .epa-logo { border-color: var(--epa-teal); }
+        
+        h1 {
+            color: var(--fc-blue);
+            margin: 15px 0;
+            font-size: 2.2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .form-container {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+        }
+        
+        .form-section {
+            padding: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .form-section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--light-bg);
+        }
+        
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .fc-icon { background: var(--fc-blue); }
+        .wrc-icon { background: var(--wrc-green); }
+        .epa-icon { background: var(--epa-teal); }
+        .core-icon { background: #673ab7; }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--fc-blue);
+            box-shadow: 0 0 0 3px rgba(26, 95, 180, 0.2);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 8px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
+        .checkbox-item input {
+            width: auto;
+            margin-right: 8px;
+        }
+        
+        .help-text {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .example {
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            border-left: 3px solid var(--fc-blue);
+        }
+        
+        .file-upload {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .file-upload:hover {
+            border-color: var(--fc-blue);
+            background: #f0f7ff;
+        }
+        
+        .file-upload i {
+            font-size: 2rem;
+            color: var(--fc-blue);
+            margin-bottom: 10px;
+        }
+        
+        .conditional-section {
+            background: #f9f9f9;
+            border-left: 4px solid var(--wrc-green);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 15px 0;
+            display: none;
+        }
+        
+        .conditional-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--light-bg);
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--fc-blue);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0d4a8a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(26, 95, 180, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--fc-blue);
+            color: var(--fc-blue);
+        }
+        
+        .btn-outline:hover {
+            background: var(--fc-blue);
+            color: white;
+        }
+        
+        .agency-notice {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 15px 0;
+        }
+        
+        .agency-notice h4 {
+            color: #e65100;
+            margin-bottom: 8px;
+        }
+        
+        .guidance {
+            background: #e8f5e9;
+            border-left: 4px solid var(--wrc-green);
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        th {
+            background: #f0f7ff;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .logos {
+                gap: 20px;
+            }
+            
+            .logo {
+                width: 100px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logos">
+                <div class="logo-container">
+                    <img src="https://fishcom.gov.gh/wp/wp-content/uploads/2022/04/fisheries-logo.jpg" alt="Fisheries Commission" class="logo fc-logo">
+                    <p>Fisheries Commission</p>
+                </div>
+                <div class="logo-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzKpP6JoXehopAQVC-7H1MDOnV2PvASZ36Nw&s" alt="Water Resources Commission" class="logo wrc-logo">
+                    <p>Water Resources Commission</p>
+                </div>
+                <div class="logo-container">
+                    <img src="https://globalabc.org/sites/default/files/members/epa%20logo.jpg" alt="Environmental Protection Agency" class="logo epa-logo">
+                    <p>Environmental Protection Agency</p>
+                </div>
+            </div>
+            <h1>Consolidated Aquaculture Permit Application</h1>
+            <p class="subtitle">This form integrates all requirements from FC, WRC, and EPA. Complete all sections relevant to your aquaculture activities. Mandatory fields are marked with *</p>
+        </header>
+        
+        <div class="form-container">
+            <!-- SECTION 0: APPLICATION OVERVIEW -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-icon core-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <h2 class="section-title">Application Overview</h2>
+                </div>
+                <div class="guidance">
+                    <p><strong>Welcome!</strong> This consolidated form is for obtaining the necessary permits for aquaculture operations in Ghana. You will be guided through a step-by-step process.</p>
+                    <p><strong>Important:</strong> The Environmental Protection Agency (EPA) and Water Resources Commission (WRC) permits are mandatory prerequisites for most Fisheries Commission (FC) permits.</p>
+                    <p><strong>WRC Exemption:</strong> If your primary water source is tap water from Ghana Water Company Limited (GWCL) or Community Water and Sanitation Agency (CWSA), and you pay utility bills, you do <strong>not</strong> need a WRC permit.</p>
+                </div>
+            </div>
+            
+            <!-- SECTION 1: CORE BUSINESS & APPLICANT INFORMATION -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-icon core-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h2 class="section-title">Core Business & Applicant Information</h2>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Name of Establishment</label>
+                    <input type="text" placeholder="e.g., Bluefin Tilapia Farms Ltd">
+                    <div class="example">Example: Bluefin Tilapia Farms Ltd</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Company Registration No.</label>
+                    <input type="text" placeholder="e.g., RG12345678">
+                    <div class="example">Example: RG12345678</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Postal Address</label>
+                    <input type="text" placeholder="e.g., P.O. Box 456, Cape Coast">
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">GhanaPost Digital Address of Office</label>
+                    <input type="text" placeholder="e.g., CC-001-1234">
+                    <div class="example">Example: CC-001-1234</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Telephone</label>
+                    <input type="tel" placeholder="e.g., +233 24 123 4567">
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Email Address</label>
+                    <input type="email" placeholder="e.g., contact@bluefinaqua.com">
+                </div>
+                
+                <h3>Location of Operation/Facility</h3>
+                <div class="form-group">
+                    <label class="required">Physical Location (Town/Area Name)</label>
+                    <input type="text" placeholder="e.g., Effia">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group" style="flex: 1; margin-right: 15px;">
+                        <label class="required">Region</label>
+                        <select id="region-select">
+                            <option value="">Select Region</option>
+                            <option value="Ashanti">Ashanti</option>
+                            <option value="Bono">Bono</option>
+                            <option value="Bono East">Bono East</option>
+                            <option value="Ahafo">Ahafo</option>
+                            <option value="Central">Central</option>
+                            <option value="Eastern">Eastern</option>
+                            <option value="Greater Accra">Greater Accra</option>
+                            <option value="Northern">Northern</option>
+                            <option value="Savannah">Savannah</option>
+                            <option value="North East">North East</option>
+                            <option value="Upper East">Upper East</option>
+                            <option value="Upper West">Upper West</option>
+                            <option value="Volta">Volta</option>
+                            <option value="Oti">Oti</option>
+                            <option value="Western">Western</option>
+                            <option value="Western North">Western North</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" style="flex: 1;">
+                        <label class="required">District</label>
+                        <select id="district-select">
+                            <option value="">Select District</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">GPS Coordinates of Facility</label>
+                    <input type="text" placeholder="e.g., 5.5500, -0.2000">
+                    <div class="example">Example: 5.5500, -0.2000</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">GhanaPost Digital Address of Facility</label>
+                    <input type="text" placeholder="e.g., WR-123-4567">
+                    <div class="example">Example: WR-123-4567</div>
+                </div>
+                
+                <h3>Ownership & Management</h3>
+                <div class="form-group">
+                    <label class="required">Name of CEO/Proprietor/Director</label>
+                    <input type="text" placeholder="e.g., Kwame Mensah">
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Name of Contact Person(s)</label>
+                    <input type="text" placeholder="e.g., Ama Serwaa">
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Ownership Type</label>
+                    <select>
+                        <option value="">Select ownership type</option>
+                        <option>Sole Proprietorship</option>
+                        <option>Partnership</option>
+                        <option>Company</option>
+                        <option>Cooperative</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Ghana Card Number</label>
+                    <input type="text" placeholder="e.g., GHA-123456789-0">
+                    <div class="help-text">Mandatory for all applicants. Enter your 11-digit Ghana Card number.</div>
+                    <div class="example">Example: GHA-123456789-0</div>
+                </div>
+                
+                <h3>Establishment Operational Details</h3>
+                <div class="form-group">
+                    <label>Year of Establishment</label>
+                    <input type="number" min="1900" max="2030" placeholder="e.g., 2020">
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Type of Culture Facility</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pond">
+                            <label for="pond">Pond</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="cage">
+                            <label for="cage">Cage</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="raceway">
+                            <label for="raceway">Raceway</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="tanks">
+                            <label for="tanks">Tanks</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pens">
+                            <label for="pens">Pens</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="aquaria">
+                            <label for="aquaria">Aquaria</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="others-facility">
+                            <label for="others-facility">Others</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Size of Establishment</label>
+                    <input type="text" placeholder="e.g., 15 ponds, 50 tanks">
+                    <div class="example">Example: 15 ponds, 50 tanks</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Production Capacity (per annum)</label>
+                    <input type="text" placeholder="e.g., 50 MT/year">
+                    <div class="example">Example: 50 MT/year</div>
+                </div>
+            </div>
+            
+            <!-- SECTION 2: EPA PERMIT APPLICATION -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-icon epa-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h2 class="section-title">Environmental Protection Agency (EPA) Permit Application</h2>
+                </div>
+                
+                <div class="guidance">
+                    <p>The Environmental Permit is mandatory. This section collects information required by the EPA for environmental impact assessment. Please provide detailed and accurate information about your project's potential impacts and mitigation measures.</p>
+                </div>
+                
+                <h3>Project Description</h3>
+                <div class="form-group">
+                    <label class="required">Title of Proposal</label>
+                    <input type="text" placeholder="e.g., Semi-intensive tilapia grow-out in concrete tanks">
+                    <div class="example">Example: Semi-intensive tilapia grow-out in concrete tanks</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Detailed Project Description</label>
+                    <textarea placeholder="Include: species, inputs (feed, chemicals), processes, waste outputs, labor, area."></textarea>
+                    <div class="example">Example: Producing 50 MT/year of Oreochromis niloticus using commercial feed. Effluent treated in sedimentation pond.</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Scope of Proposal</label>
+                    <textarea placeholder="Labor force, production capacity, market, etc."></textarea>
+                    <div class="example">Example: 20 full-time workers, 10 concrete tanks, market: local supermarkets</div>
+                </div>
+                
+                <h3>Project Site Details</h3>
+                <div class="form-group">
+                    <label class="required">Adjacent Land Uses</label>
+                    <textarea placeholder="Describe farms, homes, forests, rivers within 500m."></textarea>
+                    <div class="example">Example: Residential area to North, River Pra 200m South</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Distance to Nearest Residential Area (meters)</label>
+                    <input type="number" min="0" placeholder="e.g., 200">
+                </div>
+                
+                <div class="form-group">
+                    <label>Current Zoning</label>
+                    <input type="text" placeholder="e.g., Agricultural">
+                </div>
+                
+                <h3>Infrastructure and Utilities</h3>
+                <div class="form-group">
+                    <label>Access to Water</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="gwcl-water">
+                            <label for="gwcl-water">GWCL/CWSA Tap Water</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="surface-water">
+                            <label for="surface-water">Raw Surface Water</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="borehole-water">
+                            <label for="borehole-water">Borehole</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="rainwater-harvesting">
+                            <label for="rainwater-harvesting">Rain Harvesting</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group" style="flex: 1; margin-right: 15px;">
+                        <label>Estimated Quantity</label>
+                        <input type="number" min="0" placeholder="e.g., 200">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Per</label>
+                        <select>
+                            <option>day</option>
+                            <option>week</option>
+                            <option>month</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Nearness to Water Body</label>
+                    <input type="text" placeholder="e.g., 200m from River Pra">
+                </div>
+                
+                <h3>Environmental Impacts & Management</h3>
+                <div class="form-group">
+                    <label class="required">Potential Impacts (Construction Phase)</label>
+                    <textarea placeholder="e.g., Soil erosion, noise, dust"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Potential Impacts (Operation Phase)</label>
+                    <textarea placeholder="e.g., Nutrient-rich effluent, chemical discharge"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Impact Management Measures (Construction Phase)</label>
+                    <textarea placeholder="e.g., Silt fences, noise barriers"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Impact Management Measures (Operation Phase)</label>
+                    <textarea placeholder="e.g., Effluent treatment, buffer zones"></textarea>
+                </div>
+                
+                <h3>Stakeholder Consultation</h3>
+                <button id="add-consulted-party" class="btn btn-outline" style="margin-bottom: 15px;">
+                    <i class="fas fa-plus"></i> Add Consulted Party
+                </button>
+                
+                <div class="form-group">
+                    <table id="stakeholder-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Location (N/S/E/W)</th>
+                                <th>Concerns/Views</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Rows added dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h3>EPA Document Upload</h3>
+                <div class="form-group">
+                    <div class="file-upload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Upload EPA required documents (Site Plan, Block Plan, Photos, Zoning Letter)</p>
+                        <input type="file" multiple style="display: none;">
+                    </div>
+                    <div class="help-text">Required: Site Plan (signed by surveyor), Block Plan, Site Photos (min. 3), Zoning Letter from TCPD</div>
+                </div>
+            </div>
+            
+            <!-- SECTION 3: WRC PERMIT APPLICATION -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-icon wrc-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h2 class="section-title">Water Resources Commission (WRC) Permit Application</h2>
+                </div>
+                
+                <div class="agency-notice">
+                    <h4><i class="fas fa-exclamation-triangle"></i> WRC Permit Exemption Notice</h4>
+                    <p><strong>WRC permit is NOT required</strong> if your <strong>only water source is GWCL or CWSA tap water</strong> (you pay utility bills). If you use any other water source, you must complete this section.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">What is your PRIMARY source of water for aquaculture operations?</label>
+                    <select id="water-source">
+                        <option value="">Select primary water source</option>
+                        <option value="tap">Ghana Water Company Ltd. (GWCL)/CWSA (Tap Water)</option>
+                        <option value="river">River</option>
+                        <option value="lake">Lake</option>
+                        <option value="reservoir">Reservoir</option>
+                        <option value="groundwater">Groundwater (Borehole/Wells)</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div id="wrc-exemption" class="agency-notice" style="display: none;">
+                    <h4><i class="fas fa-check-circle"></i> WRC Permit Not Required</h4>
+                    <p>Based on your water source selection, a WRC Water Use Permit is not required. You may proceed to the next section.</p>
+                </div>
+                
+                <div id="wrc-form" class="conditional-section">
+                    <h3>Water Use Details</h3>
+                    <div class="form-group">
+                        <label class="required">Purpose of Water Use</label>
+                        <select>
+                            <option value="">Select purpose</option>
+                            <option>Aquaculture-Cage</option>
+                            <option>Aquaculture-Pond</option>
+                            <option>Aquaculture-Hatchery</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Point of Water Use (GPS Coordinates)</label>
+                        <input type="text" placeholder="e.g., 5.5505, -0.2005">
+                        <div class="example">Example: 5.5505, -0.2005</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Type of Water Source</label>
+                        <select>
+                            <option value="">Select type</option>
+                            <option>River</option>
+                            <option>Lake</option>
+                            <option>Groundwater</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Name of Water Source</label>
+                        <input type="text" placeholder="e.g., River Pra, Borehole BH-01">
+                        <div class="example">Example: River Pra, Borehole BH-01</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Rate of Use (m³/annum)</label>
+                        <input type="number" min="0" placeholder="e.g., 73000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Method of Abstraction</label>
+                        <input type="text" placeholder="e.g., Submersible pump, 2 HP">
+                        <div class="example">Example: Submersible pump, 2 HP</div>
+                    </div>
+                    
+                    <h3>Abstraction (For all consumptive uses)</h3>
+                    <div class="form-group">
+                        <label>Names and models of pumps</label>
+                        <input type="text" placeholder="e.g., Grundfos SP 5A">
+                    </div>
+                    <div class="form-group">
+                        <label>Pumping/Withdrawal mechanism</label>
+                        <input type="text" placeholder="e.g., Submersible electric pump">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group" style="flex: 1; margin-right: 15px;">
+                            <label>Number of pumps installed</label>
+                            <input type="number" min="0" placeholder="e.g., 2">
+                        </div>
+                        <div class="form-group" style="flex: 1; margin-right: 15px;">
+                            <label>Capacity of pumps (m³/hr)</label>
+                            <input type="number" min="0" step="0.1" placeholder="e.g., 10">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>Capacity of additional pumps (to be installed)</label>
+                            <input type="number" min="0" step="0.1" placeholder="e.g., 5">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group" style="flex: 1; margin-right: 15px;">
+                            <label>Pumping hours per day</label>
+                            <input type="number" min="0" max="24" placeholder="e.g., 8">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>Rate of abstraction (per hour) (m³/hr)</label>
+                            <input type="number" min="0" step="0.1" placeholder="e.g., 8">
+                        </div>
+                    </div>
+                    
+                    <h3>Data on Discharges or Return Flows</h3>
+                    <div class="form-group">
+                        <label>Will there be any discharge or return flow to the natural environment?</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="radio" name="discharge" id="discharge-yes" value="yes">
+                                <label for="discharge-yes">Yes</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="radio" name="discharge" id="discharge-no" value="no" checked>
+                                <label for="discharge-no">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="discharge-details" class="conditional-section">
+                        <div class="form-group">
+                            <label>Discharge Point (GPS Coordinates)</label>
+                            <input type="text" placeholder="e.g., 5.5490, -0.2010">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Quantity of Return Flow (m³/day)</label>
+                            <input type="number" min="0" placeholder="e.g., 200">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Frequency of Discharge</label>
+                            <input type="text" placeholder="e.g., Continuous">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Type of Effluent Treatment System</label>
+                            <textarea placeholder="e.g., Two-stage sedimentation + planted wetland"></textarea>
+                        </div>
+                    </div>
+                    
+                    <h3>Aquaculture-Specific Data</h3>
+                    <div id="cage-data" class="conditional-section">
+                        <h4>Cage Aquaculture</h4>
+                        <div class="form-group">
+                            <label>Proposed concession area (m²)</label>
+                            <input type="number" min="0" placeholder="e.g., 5000">
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Cages</label>
+                            <input type="number" min="0" placeholder="e.g., 20">
+                        </div>
+                        <div class="form-group">
+                            <label>Dimensions of Cages (m)</label>
+                            <input type="text" placeholder="e.g., 5x5x3">
+                        </div>
+                        <div class="form-group">
+                            <label>GPS coordinates of Proposed Concession Area</label>
+                            <input type="text" placeholder="e.g., 5.5505, -0.2005">
+                        </div>
+                        <div class="form-group">
+                            <label>Species to be cultivated</label>
+                            <input type="text" placeholder="e.g., Oreochromis niloticus">
+                        </div>
+                        <div class="form-group">
+                            <label>Source of fry/fingerling</label>
+                            <input type="text" placeholder="e.g., AquaGen Hatchery, Kumasi">
+                        </div>
+                        <div class="form-group">
+                            <label>Name and source of feed</label>
+                            <input type="text" placeholder="e.g., Skretting, Norway">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group" style="flex: 1; margin-right: 15px;">
+                                <label>Sizes of feed</label>
+                                <input type="text" placeholder="e.g., 2mm, 4mm">
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label>Quantities of feed administered per day</label>
+                                <input type="text" placeholder="e.g., 50 kg">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="pond-data" class="conditional-section">
+                        <h4>Pond Aquaculture</h4>
+                        <div class="form-group">
+                            <label>Number of ponds</label>
+                            <input type="number" min="0" placeholder="e.g., 15">
+                        </div>
+                        <div class="form-group">
+                            <label>Dimensions of ponds (m)</label>
+                            <input type="text" placeholder="e.g., 30x20x1.5">
+                        </div>
+                        <div class="form-group">
+                            <label>Frequency of effluent discharge from ponds</label>
+                            <input type="text" placeholder="e.g., Daily">
+                        </div>
+                        <div class="form-group">
+                            <label>Discharge from ponds (m³/min)</label>
+                            <input type="number" min="0" step="0.1" placeholder="e.g., 0.5">
+                        </div>
+                        <div class="form-group">
+                            <label>Type of effluent treatment system in place</label>
+                            <textarea placeholder="e.g., Two-stage sedimentation + planted wetland"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Species to be cultivated</label>
+                            <input type="text" placeholder="e.g., Clarias gariepinus">
+                        </div>
+                        <div class="form-group">
+                            <label>Source of fry/fingerling</label>
+                            <input type="text" placeholder="e.g., River Pra - wild stock">
+                        </div>
+                        <div class="form-group">
+                            <label>Name and source of feed</label>
+                            <input type="text" placeholder="e.g., BioMar, Denmark">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group" style="flex: 1; margin-right: 15px;">
+                                <label>Sizes of feed</label>
+                                <input type="text" placeholder="e.g., 3mm, 5mm">
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label>Quantities of feed administered per day</label>
+                                <input type="text" placeholder="e.g., 100 kg">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="tank-data" class="conditional-section">
+                        <h4>Tank Aquaculture</h4>
+                        <div class="form-group">
+                            <label>Number of tanks</label>
+                            <input type="number" min="0" placeholder="e.g., 50">
+                        </div>
+                        <div class="form-group">
+                            <label>Volume of tanks (m³)</label>
+                            <input type="number" min="0" step="0.1" placeholder="e.g., 10">
+                        </div>
+                        <div class="form-group">
+                            <label>Frequency of discharge of tanks</label>
+                            <input type="text" placeholder="e.g., Continuous flow">
+                        </div>
+                        <div class="form-group">
+                            <label>Discharge from tanks (m³/min)</label>
+                            <input type="number" min="0" step="0.1" placeholder="e.g., 0.2">
+                        </div>
+                        <div class="form-group">
+                            <label>Type of effluent treatment system in place</label>
+                            <textarea placeholder="e.g., Recirculating aquaculture system (RAS)"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Species to be cultivated</label>
+                            <input type="text" placeholder="e.g., Heterobranchus longifilis">
+                        </div>
+                        <div class="form-group">
+                            <label>Source of fry/fingerling</label>
+                            <input type="text" placeholder="e.g., National Aquaculture Centre, Tema">
+                        </div>
+                        <div class="form-group">
+                            <label>Name and source of feed</label>
+                            <input type="text" placeholder="e.g., Aller Aqua, Ghana">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group" style="flex: 1; margin-right: 15px;">
+                                <label>Sizes of feed</label>
+                                <input type="text" placeholder="e.g., 1.5mm, 2.5mm">
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label>Quantities of feed administered per day</label>
+                                <input type="text" placeholder="e.g., 30 kg">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3>WRC Document Upload</h3>
+                    <div class="form-group">
+                        <div class="file-upload">
+                            <i class="fas fa-file-upload"></i>
+                            <p>Upload WRC required documents</p>
+                            <input type="file" multiple style="display: none;">
+                        </div>
+                        <div class="help-text">Required: Site Plan/Concession Map, Water Demand Management Plan, EPA Environmental Permit</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SECTION 4: FC PROJECT-SPECIFIC DETAILS -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-icon fc-icon">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <h2 class="section-title">Fisheries Commission (FC) Project-Specific Details</h2>
+                </div>
+                
+                <div class="guidance">
+                    <p>Please select the specific FC permit(s) you are applying for. The fields below will change based on your selection. You must have or be applying for the EPA and (if applicable) WRC permits in the previous sections to be eligible.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label>Select FC Permit Type(s)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="import-organisms">
+                            <label for="import-organisms">Import Live Aquatic Organisms (FC Form S)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="export-organisms">
+                            <label for="export-organisms">Export Live Aquatic Organisms (FC Form W)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="import-inputs">
+                            <label for="import-inputs">Import Aquaculture Inputs (FC Form Qa)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="produce-inputs">
+                            <label for="produce-inputs">Produce Aquaculture Inputs (FC Form Qb)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="breeding">
+                            <label for="breeding">Aquatic Organism Breeding (FC Form O)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="seed-production">
+                            <label for="seed-production">Aquatic Organism Seed Production (FC Form J)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="transfer">
+                            <label for="transfer">Transfer Aquatic Organisms within Ghana (FC Form M)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="grow-out">
+                            <label for="grow-out">Semi-Intensive/Intensive Grow-Out Operations (FC Form H)</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dynamic FC Sections -->
+                <div id="fc-import-export" class="conditional-section">
+                    <h3>Live Organism Import/Export/Transfer</h3>
+                    <div class="form-group">
+                        <label class="required">Address of the Consignor/Consignee</label>
+                        <textarea placeholder="Full address"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Country of Origin/Destination</label>
+                        <input type="text" placeholder="e.g., Norway">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Purpose</label>
+                        <select>
+                            <option>Ornamental</option>
+                            <option>Breeding</option>
+                            <option>Bait</option>
+                            <option>Grow-out</option>
+                            <option>Food</option>
+                            <option>Research</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    
+                    <h4>Organism Details</h4>
+                    <div class="form-group">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                            <thead>
+                                <tr style="background: #f0f7ff;">
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Species Name (Scientific)</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Common Name</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Stage</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Quantity (pieces/kg)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><input type="text" placeholder="e.g., Oreochromis niloticus" style="width: 100%; border: none;"></td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><input type="text" placeholder="e.g., Nile Tilapia" style="width: 100%; border: none;"></td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">
+                                        <select style="width: 100%; border: none; background: transparent;">
+                                            <option>Fish</option>
+                                            <option>Eggs</option>
+                                            <option>Gametes</option>
+                                            <option>Fry</option>
+                                            <option>Fingerling</option>
+                                            <option>Adult</option>
+                                        </select>
+                                    </td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><input type="text" placeholder="e.g., 10,000 pcs" style="width: 100%; border: none;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Mode of Transportation</label>
+                        <input type="text" placeholder="e.g., Air freight">
+                    </div>
+                </div>
+                
+                <div id="fc-inputs" class="conditional-section">
+                    <h3>Aquaculture Inputs</h3>
+                    <div class="form-group">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                            <thead>
+                                <tr style="background: #f0f7ff;">
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Item</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Quantity (Units)</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Source/Country</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Manufacturer</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><input type="text" placeholder="e.g., Fish feed" style="width: 100%; border: none;"></td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><input type="text" placeholder="e.g., 5,000 kg" style="width: 100%; border: none;"></td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><input type="text" placeholder="e.g., Norway" style="width: 100%; border: none;"></td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><input type="text" placeholder="e.g., Skretting AS" style="width: 100%; border: none;"></td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><input type="text" placeholder="e.g., Broodstock feeding" style="width: 100%; border: none;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div id="raw-materials" class="conditional-section">
+                        <div class="form-group">
+                            <label>Raw Materials (for Production)</label>
+                            <textarea placeholder="List raw materials used in production"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="fc-breeding-seed" class="conditional-section">
+                    <h3>Breeding & Seed Production</h3>
+                    <div class="form-group">
+                        <label class="required">Species to be Bred/Produced</label>
+                        <input type="text" placeholder="e.g., Clarias gariepinus">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Characteristics of Intended Breed</label>
+                        <textarea placeholder="e.g., fast growth, disease resistance, bright colours"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Origin of Broodstock</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="radio" name="broodstock-origin" id="wild-origin" value="wild">
+                                <label for="wild-origin">Wild</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="radio" name="broodstock-origin" id="culture-origin" value="culture" checked>
+                                <label for="culture-origin">Culture</label>
+                            </div>
+                        </div>
+                        <input type="text" placeholder="e.g., River Pra - 5.5500, -0.2000" style="margin-top: 10px;">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group" style="flex: 1; margin-right: 15px;">
+                            <label>No. of Broodstock: Male</label>
+                            <input type="number" min="0" placeholder="e.g., 50">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>No. of Broodstock: Female</label>
+                            <input type="number" min="0" placeholder="e.g., 100">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Facilities at Breeding/Seed Station</label>
+                        <textarea placeholder="Describe facilities available"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Previous Experience</label>
+                        <textarea placeholder="Describe previous breeding experience"></textarea>
+                    </div>
+                </div>
+                
+                <div id="fc-grow-out" class="conditional-section">
+                    <h3>Grow-Out Operations</h3>
+                    <div class="form-group">
+                        <label class="required">Species to be Produced</label>
+                        <input type="text" placeholder="e.g., Oreochromis niloticus">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Type of Operation</label>
+                        <select>
+                            <option>Semi-Intensive</option>
+                            <option>Intensive</option>
+                        </select>
+                    </div>
+                    
+                    <h4>Facility Details</h4>
+                    <div class="form-group">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                            <thead>
+                                <tr style="background: #f0f7ff;">
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Type of Structure</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Number</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Size/Dimensions</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Capacity (MT)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">
+                                        <select style="width: 100%; border: none; background: transparent;">
+                                            <option>Ponds</option>
+                                            <option>Cages</option>
+                                            <option>Tanks</option>
+                                            <option>Aquaria</option>
+                                            <option>Others</option>
+                                        </select>
+                                    </td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><input type="number" min="0" placeholder="e.g., 10" style="width: 100%; border: none;"></td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><input type="text" placeholder="e.g., 30x20x1.5m" style="width: 100%; border: none;"></td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><input type="number" min="0" placeholder="e.g., 30" style="width: 100%; border: none;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">List of Activities to be Carried Out</label>
+                        <textarea placeholder="e.g., Feeding, water quality monitoring, harvesting"></textarea>
+                    </div>
+                </div>
+                
+                <h3>FC Document Upload</h3>
+                <div class="form-group">
+                    <div class="file-upload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Upload FC required documents</p>
+                        <input type="file" multiple style="display: none;">
+                    </div>
+                    <div class="help-text">Required: Sanitary Permit (all), Layout of Establishment (Grow-Out), Export Permit from Origin Country (Import)</div>
+                </div>
+            </div>
+            
+            <!-- SECTION 5: FINAL DECLARATION -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-icon core-icon">
+                        <i class="fas fa-signature"></i>
+                    </div>
+                    <h2 class="section-title">Final Declaration and Submission</h2>
+                </div>
+                
+                <div class="guidance">
+                    <p>By submitting this form, you declare that all information provided is true and correct to the best of your knowledge. You understand that providing false information may lead to the rejection of your application or revocation of any permit granted.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Name of Applicant</label>
+                    <input type="text" placeholder="Auto-filled from Section 1, editable for verification">
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Declaration</label>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="declaration" required>
+                        <label for="declaration">I declare that all information provided is true and complete. I understand that false statements may result in permit denial or revocation.</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Signature</label>
+                    <div style="border: 1px solid #ddd; border-radius: 8px; height: 120px; background: #f9f9f9; display: flex; align-items: center; justify-content: center;">
+                        <p style="color: #888;">Digital signature pad will appear here</p>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="text" value="Auto-generated" readonly style="background: #f0f0f0;">
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-save"></i> Save Draft
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Submit Application
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Consolidated Aquaculture Permit Application Form | Developed in compliance with FC, WRC, and EPA requirements</p>
+            <p style="margin-top: 8px; font-size: 0.85rem; color: #888;">All fields marked with * are mandatory. Ghana Card number is required for all applicants.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Region-District Mapping
+        const districtsByRegion = {
+            "Ashanti": ["Kumasi", "Obuasi", "Ejisu", "Bekwai", "Mampong"],
+            "Oti": ["Jasikan", "Kadjebi", "Krachi East", "Krachi West", "Nkwanta North", "Nkwanta South"],
+            "Greater Accra": ["Accra Metro", "Tema", "Ga East", "Ga West", "Adenta"],
+            "Western": ["Sekondi-Takoradi", "Tarkwa-Nsuaem", "Wassa East", "Wassa Amenfi Central"],
+            "Central": ["Cape Coast", "Elmina", "Agona", "Komenda", "Mfantsiman"],
+            "Eastern": ["Koforidua", "Akim Oda", "Nsawam", "Suhum", "New Juaben"],
+            "Volta": ["Ho", "Keta", "Hohoe", "Kpando", "North Tongu"],
+            "Northern": ["Tamale", "Savelugu", "Yendi", "Karaga", "Gushegu"],
+            "Upper East": ["Bolgatanga", "Bawku", "Navrongo", "Paga", "Zebilla"],
+            "Upper West": ["Wa", "Nadowli", "Jirapa", "Lambussie", "Sissala East"],
+            "Bono": ["Sunyani", "Dormaa", "Wenchi", "Techiman", "Jaman North"],
+            "Bono East": ["Techiman", "Kintampo", "Atebubu", "Nkoranza", "Yeji"],
+            "Ahafo": ["Goaso", "Asunafo", "Tano North", "Tano South"],
+            "Savannah": ["Damongo", "Salaga", "Bole", "Central Gonja"],
+            "North East": ["Nalerigu", "Walewale", "Chereponi", "Mamprugu Moagduri"],
+            "Western North": ["Sefwi Wiawso", "Bibiani", "Juaboso", "Sefwi Akontombra"]
+        };
+
+        // Populate Districts based on Region
+        document.getElementById('region-select').addEventListener('change', function() {
+            const region = this.value;
+            const districtSelect = document.getElementById('district-select');
+            districtSelect.innerHTML = '<option value="">Select District</option>';
+            
+            if (region && districtsByRegion[region]) {
+                districtsByRegion[region].forEach(district => {
+                    const option = document.createElement('option');
+                    option.value = district;
+                    option.textContent = district;
+                    districtSelect.appendChild(option);
+                });
+            }
+        });
+
+        // Stakeholder Consultation Table
+        document.getElementById('add-consulted-party').addEventListener('click', function() {
+            const tableBody = document.querySelector('#stakeholder-table tbody');
+            const row = document.createElement('tr');
+            
+            row.innerHTML = `
+                <td><input type="text" placeholder="e.g., Effia Town Chief"></td>
+                <td><input type="text" placeholder="e.g., +233 24 123 4567"></td>
+                <td><input type="text" placeholder="e.g., North"></td>
+                <td><textarea placeholder="e.g., Concerned about water usage"></textarea></td>
+                <td><button class="btn btn-outline" style="padding: 5px 10px; font-size: 0.9rem;" onclick="this.closest('tr').remove()"><i class="fas fa-trash"></i></button></td>
+            `;
+            
+            tableBody.appendChild(row);
+        });
+
+        // Toggle WRC section based on water source
+        document.getElementById('water-source').addEventListener('change', function() {
+            const wrcForm = document.getElementById('wrc-form');
+            const exemptionNotice = document.getElementById('wrc-exemption');
+            
+            if (this.value === 'tap') {
+                wrcForm.style.display = 'none';
+                exemptionNotice.style.display = 'block';
+            } else {
+                wrcForm.style.display = 'block';
+                exemptionNotice.style.display = 'none';
+            }
+        });
+
+        // Toggle discharge details
+        document.querySelectorAll('input[name="discharge"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const dischargeDetails = document.getElementById('discharge-details');
+                if (this.value === 'yes') {
+                    dischargeDetails.classList.add('show');
+                    dischargeDetails.style.display = 'block';
+                } else {
+                    dischargeDetails.classList.remove('show');
+                    dischargeDetails.style.display = 'none';
+                }
+            });
+        });
+
+        // Toggle FC sections based on selections
+        const fcCheckboxes = [
+            { id: 'import-organisms', section: 'fc-import-export' },
+            { id: 'export-organisms', section: 'fc-import-export' },
+            { id: 'transfer', section: 'fc-import-export' },
+            { id: 'import-inputs', section: 'fc-inputs' },
+            { id: 'produce-inputs', section: 'fc-inputs' },
+            { id: 'breeding', section: 'fc-breeding-seed' },
+            { id: 'seed-production', section: 'fc-breeding-seed' },
+            { id: 'grow-out', section: 'fc-grow-out' }
+        ];
+        
+        fcCheckboxes.forEach(item => {
+            document.getElementById(item.id).addEventListener('change', function() {
+                const section = document.getElementById(item.section);
+                if (this.checked) {
+                    section.classList.add('show');
+                    section.style.display = 'block';
+                } else {
+                    // Check if any related checkbox is still checked
+                    const relatedChecked = fcCheckboxes
+                        .filter(cb => cb.section === item.section)
+                        .some(cb => document.getElementById(cb.id).checked);
+                    
+                    if (!relatedChecked) {
+                        section.classList.remove('show');
+                        section.style.display = 'none';
+                    }
+                }
+            });
+        });
+        
+        // Show raw materials only if "Produce Inputs" is selected
+        document.getElementById('produce-inputs').addEventListener('change', function() {
+            const rawMaterials = document.getElementById('raw-materials');
+            if (this.checked) {
+                rawMaterials.classList.add('show');
+                rawMaterials.style.display = 'block';
+            } else {
+                rawMaterials.classList.remove('show');
+                rawMaterials.style.display = 'none';
+            }
+        });
+        
+        // Show aquaculture-specific WRC data based on facility type
+        const facilityCheckboxes = ['pond', 'cage', 'tanks'];
+        facilityCheckboxes.forEach(type => {
+            document.getElementById(type).addEventListener('change', function() {
+                const sectionId = type === 'tanks' ? 'tank-data' : type + '-data';
+                const section = document.getElementById(sectionId);
+                if (this.checked) {
+                    section.classList.add('show');
+                    section.style.display = 'block';
+                } else {
+                    section.classList.remove('show');
+                    section.style.display = 'none';
+                }
+            });
+        });
+        
+        // File upload styling
+        document.querySelectorAll('.file-upload').forEach(upload => {
+            upload.addEventListener('click', function() {
+                const input = this.querySelector('input[type="file"]');
+                if (input) input.click();
+            });
+        });
+    </script>
+</body>
+</html>
